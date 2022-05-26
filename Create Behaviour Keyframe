@@ -1,0 +1,26 @@
+//Add a Behaviour type keyframe to the current selected GameObject's Animation component, used to enable/disable Animator component by Animation.
+
+using UnityEngine;
+using UnityEditor;
+
+public class CreateBehaviourKeyframe : MonoBehaviour
+{
+    [MenuItem("MyMenu/Create Behaviour Keyframe")]
+    static void DoSomething()
+    {
+        GameObject selectingObj = Selection.activeGameObject;
+        Animation animation = selectingObj.GetComponent<Animation>();
+
+        AnimationCurve curve;
+        AnimationClip clip = animation.clip;
+        //clip.legacy = true;
+
+        Keyframe[] keys = new Keyframe[1];
+        keys[0] = new Keyframe(0, 0);
+        curve = new AnimationCurve(keys);
+
+        clip.SetCurve("child GameObject", typeof(Behaviour), "m_Enabled", curve);
+
+        animation.AddClip(clip, clip.name);
+    }
+}
