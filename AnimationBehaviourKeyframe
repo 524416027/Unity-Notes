@@ -1,0 +1,24 @@
+using UnityEngine;
+using UnityEditor;
+
+public class testAnimationCurve : MonoBehaviour
+{
+    [MenuItem("MyMenu/Create Behaviour Keyframe")]
+    static void DoSomething()
+    {
+        GameObject selectingObj = Selection.activeGameObject;
+        Animation animation = selectingObj.GetComponent<Animation>();
+
+        AnimationCurve curve;
+        AnimationClip clip = animation.clip;
+        clip.legacy = true;
+
+        Keyframe[] keys = new Keyframe[1];
+        keys[0] = new Keyframe(0, 0);
+        curve = new AnimationCurve(keys);
+
+        clip.SetCurve("child GameObject", typeof(Behaviour), "m_Enabled", curve);
+
+        animation.AddClip(clip, clip.name);
+    }
+}
