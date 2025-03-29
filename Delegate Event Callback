@@ -1,0 +1,15 @@
+using System;
+using UnityEngine;
+
+public class PlayerInput : MonoBehaviourprivate void Awake()
+{
+    public delegate void OnPlayerAttack1KeyPressedDelegate();
+    public event OnPlayerAttack1KeyPressedDelegate OnPlayerAttack1KeyPressedListeners = null;
+
+    private void OnPlayerAttack1KeyPressed()
+    {
+        if (OnPlayerAttack1KeyPressedListeners == null) return;
+
+        OnPlayerAttack1KeyPressedListeners();
+    }
+}
