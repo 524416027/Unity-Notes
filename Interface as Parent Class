@@ -1,0 +1,12 @@
+// call Interface class as parent class, use inspector field to get the reference in script
+// open script property window, drag the script instance to the UnityEngine.Object field as Interface type
+
+[SerializeField] private UnityEngine.Object _iOnViewingUI = null;
+
+public void OnMouseButton1Select(InputAction.CallbackContext context)
+    {
+        // cast UnityEngine.Object into specific type
+        IOnViewingUI iOnViewingUI = _iOnViewingUI as IOnViewingUI;
+        
+        // access iOnViewingUI as its original type
+    }
